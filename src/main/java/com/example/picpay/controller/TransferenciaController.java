@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/transferencia")
@@ -18,11 +21,13 @@ public class TransferenciaController {
 
     // Endpoint para realizar a transferência
     @PostMapping("/realizar")
-    public ResponseEntity<ApiResponse<String>> transferir(
-            @RequestParam Long usuarioRemetenteId,
-            @RequestParam Long usuarioDestinatarioId,
-            @RequestParam BigDecimal valor) {
+    public ResponseEntity<ApiResponse<String>> transferir(@RequestBody Map<String, Object> transferenciaDados) {
         try {
+            // Extrai os dados do corpo da requisição
+            Long usuarioRemetenteId = Long.valueOf(transferenciaDados.get("idRemetente").toString());
+            Long usuarioDestinatarioId = Long.valueOf(transferenciaDados.get("idDestinatario").toString());
+            BigDecimal valor = new BigDecimal(transferenciaDados.get("valor").toString());
+
             // Validações de entrada
             if (valor.compareTo(BigDecimal.ZERO) <= 0) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -30,9 +35,13 @@ public class TransferenciaController {
             }
 
             // Executa a transferência
-            String resultado = transferenciaService.transferir(usuarioRemetenteId, usuarioDestinatarioId, valor);
+            transferenciaService.transferir(usuarioRemetenteId, usuarioDestinatarioId, valor);
+
+            // Formata a data e hora da transação
+            String dataTransacao = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ApiResponse<>(200, "Transferência realizada com sucesso.", resultado));
+                    .body(new ApiResponse<>(200, "Transferência realizada com sucesso.", "Data da transação: " + dataTransacao));
 
         } catch (IllegalArgumentException e) {
             // Exceção lançada por argumentos inválidos

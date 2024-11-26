@@ -5,13 +5,19 @@ import java.math.BigDecimal;
 
 @Entity
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
-    private String email;
     private String senha;
+
+    @Column(unique = true)  // Garante que o email seja único no banco
+    private String email;
+
+    @Column(unique = true)  // Garante que o CPF seja único no banco
+    private String cpf;
 
     private BigDecimal saldo = BigDecimal.ZERO;
 
@@ -38,6 +44,14 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {  // Corrigido para aceitar String em vez de int
+        this.cpf = cpf;
     }
 
     public String getSenha() {
