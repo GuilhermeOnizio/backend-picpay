@@ -24,7 +24,7 @@ Bem-vindo ao projeto PicPay Clone, uma aplicação back-end que simula funcional
 - Java 23
 - Spring Boot 3
 - Maven
-- Banco de Dados H2 (em memória) (pode ser substituído por MySQL ou outro SGBD)
+- MySQL
 - JPA/Hibernate
 - Lombok
 - Insomnia (para testes de API)
