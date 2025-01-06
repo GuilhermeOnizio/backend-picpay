@@ -1,6 +1,6 @@
 # :star2: PicPay Clone - Sistema de Gestão de Pagamentos
 
-Bem-vindo ao projeto PicPay Clone, uma aplicação back-end que simula funcionalidades essenciais de um sistema de pagamentos. Este sistema é desenvolvido com Java e utiliza o framework Spring Boot para fornecer endpoints REST que gerenciam usuários, transações, histórico de pagamentos e saldos.
+Bem-vindo ao projeto PicPay Clone, uma aplicação back-end que simula funcionalidades essenciais de um sistema de pagamentos. Este projeto foi feito apenas para fins de estudo e treino para melhorar minhas habilidades. Este sistema é desenvolvido com Java e utiliza o framework Spring Boot para fornecer endpoints REST que gerenciam usuários, transações, histórico de pagamentos e saldos.
 
 ## Funcionalidades
 
